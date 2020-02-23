@@ -1,12 +1,39 @@
 import React from "react";
 import * as d3 from "d3";
+import 'antd/dist/antd.css';
 import "./App.css";
 
+// socket
+import IO from 'socket.io-client';
+
+// antd
+import { message, Button, Input } from 'antd';
+const { TextArea } = Input;
+
 class App extends React.PureComponent {
+
+  socket = null
+
+  state = {
+    message: ''
+  }
+
   componentDidMount() {
     this.renderForceDirectedGraph();
     this.renderBar();
+    this.connetListen();
   }
+
+  connetListen() {
+    this.socket = IO.connect(`http://${window.location.hostname}:5599`);
+    this.socket.on('people-join', (data) => {
+      message.info(data.message);
+    });
+    this.socket.on('response-all', (data) => {
+      message.info(data.message);
+    })
+  }
+
   renderForceDirectedGraph() {
     const nodes = [
       { name: "桂林" },
@@ -77,7 +104,7 @@ class App extends React.PureComponent {
       .append("text")
       .style("fill", "black")
       .attr("dx", 20)
-      .attr("dy", 8)
+      .attr("dy", -10)
       .text(function(d) {
         return d.name;
       });
@@ -118,6 +145,7 @@ class App extends React.PureComponent {
         });
     });
   }
+
   renderBar() {
     const width = 300,
       height = 300;
@@ -155,10 +183,26 @@ class App extends React.PureComponent {
       .attr("height", rectHeight - 2)
       .attr("fill", "steelblue");
   }
+
+  messageChange = (e) => {
+    this.setState({ message: e.target.value });
+  }
+
+  sendMessage = () => {
+    const { message } = this.state;
+    this.socket.emit('one-request', { message });
+  }
+
   render() {
+    const { message } = this.state;
+
     return [
-      <div key="1" className="App" id="Force" />,
-      <div key="2" className="App" id="Bar" />,
+      <div key="1">
+        <TextArea value={message} onChange={this.messageChange} rows={4} />
+        <Button type="primary" onClick={this.sendMessage}>发送</Button>
+      </div>,
+      <div key="2" className="App" id="Force" />,
+      <div key="3" className="App" id="Bar" />,
     ];
   }
 }
