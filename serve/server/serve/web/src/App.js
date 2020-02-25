@@ -25,7 +25,7 @@ class App extends React.PureComponent {
   }
 
   connetListen() {
-    this.socket = IO.connect(`http://${window.location.hostname}:5599`);
+    this.socket = IO.connect(`https://${window.location.hostname}/chat-test`);
     this.socket.on('people-join', (data) => {
       message.info(data.message);
     });
