@@ -1,0 +1,13 @@
+{
+  "name": "d3-study-server",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "koa": "^2.11.0",
+    "socket.io": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  }
+}
