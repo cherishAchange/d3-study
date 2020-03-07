@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.app-footer {
+  background: rgb(24, 24, 24);
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+}
+
+.keep-on-record {
+  color: #73777a;
+  font-size: 14px;
+}
+
+.keep-on-record:hover {
+  color: antiquewhite;
+}

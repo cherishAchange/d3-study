@@ -25,7 +25,7 @@ class App extends React.PureComponent {
   }
 
   connetListen() {
-    this.socket = IO.connect(`https://${window.location.hostname}/chat-test`);
+    this.socket = IO.connect(`${window.location.origin}/chat`);
     this.socket.on('people-join', (data) => {
       message.info(data.message);
     });
@@ -203,6 +203,9 @@ class App extends React.PureComponent {
       </div>,
       <div key="2" className="App" id="Force" />,
       <div key="3" className="App" id="Bar" />,
+      <footer className="app-footer" key="footer">
+        <a className="keep-on-record" href="http://www.beian.miit.gov.cn/" target="_blank">京ICP备19051314号-1</a>
+      </footer>
     ];
   }
 }
