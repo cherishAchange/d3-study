@@ -1,0 +1,14 @@
+{
+    "background.useDefault": false,
+    "background.customImages": [
+        "file:///Users/maomao/Documents/d3-study/.vscode/Lake.jpg"
+    ],
+    "background.style": {
+        "-webkit-background-size": "cover",
+        "-moz-background-size": "cover",
+        "-o-background-size": "cover",
+        "background-size": "cover",
+	"opacity": 0.2
+    },
+    "editor.cursorStyle": "underline"
+}
