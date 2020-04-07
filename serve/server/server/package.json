@@ -4,10 +4,16 @@
   "private": true,
   "dependencies": {
     "koa": "^2.11.0",
+    "koa-router": "^8.0.8",
+    "koa-router-joi-validator": "^0.0.4",
+    "mongodb": "^3.5.5",
     "socket.io": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
