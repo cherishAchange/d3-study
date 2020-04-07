@@ -2,7 +2,9 @@ const Koa = require('koa');
 const app = new Koa();
 const server = require('http').createServer(app.callback());
 const io = require('socket.io')(server);
+const router = require('./src/Router');
 
+// socket.io
 const nsp = io.of('/chat');
 let roomName = `${Math.random()}`;
 nsp.on('connection', (socket) => {
@@ -16,6 +18,11 @@ nsp.on('connection', (socket) => {
         nsp.to(roomName).emit('response-all', { message: data.message });
     });
 });
+
+// 路由
+app
+    .use(router.routes())
+    .use(router.allowedMethods());
 
 server.listen(5599);
 
