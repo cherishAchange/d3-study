@@ -20,21 +20,41 @@ class Model {
         });
     }
 
-    insertDocuments(collectionName, documents, callback) {
-        this.createConnect().then(db => {
+    insertDocuments(collectionName, documents) {
+        return this.createConnect().then(db => {
             // Get the documents collection
             const collection = db.collection(collectionName);
             // Insert some documents
-            collection.insertMany(documents, (err, result) => {
-                assert.equal(err, null);
-                assert.equal(1, result.result.n);
-                assert.equal(1, result.ops.length);
-                console.log("Inserted 3 documents into the collection");
-                callback(result);
-                this.closeConnect();
+            return new Promise((resolve, reject) => {
+                collection.insertMany(documents, (err, result) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    assert.equal(err, null);
+                    assert.equal(1, result.result.n);
+                    assert.equal(1, result.ops.length);
+                    resolve(result);
+                    this.closeConnect();
+                });
             });
-        }).catch(err => {
-            callback(err);
+        });
+    }
+
+    queryDocuments(collectionName, query) {
+        return this.createConnect().then(db => {
+            // Get the documents collection
+            const collection = db.collection(collectionName);
+            // Insert some documents
+            return new Promise((resolve, reject) => {
+                collection.find(query).toArray((err, result) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    assert.equal(err, null);
+                    resolve(result);
+                    this.closeConnect();
+                });
+            });
         });
     }
 
