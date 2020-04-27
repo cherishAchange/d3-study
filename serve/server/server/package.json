@@ -10,10 +10,31 @@
     "socket.io": "^2.3.0"
   },
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js"
+    "dev": "concurrently \"yarn run watch\" \"yarn run start\"",
+    "watch": "tsc --watch",
+    "start": "nodemon -L --watch dist dist/app.js",
+    "prod": "tsc",
+    "test": "jest",
+    "coverage": "jest --coverage"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "@types/koa": "^2.11.3",
+    "@types/koa-router": "^7.4.0",
+    "@types/node": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
+    "concurrently": "^5.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "jest": "^25.4.0",
+    "nodemon": "^2.0.2",
+    "typescript": "^3.8.3"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
