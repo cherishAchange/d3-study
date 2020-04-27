@@ -1,0 +1,19 @@
+{
+  "name": "root",
+  "private": true,
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "jest": "^25.4.0",
+    "lerna": "^3.20.2",
+    "ts-jest": "^25.4.0",
+    "typescript": "^3.8.3"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run test"
+    }
+  }
+}
