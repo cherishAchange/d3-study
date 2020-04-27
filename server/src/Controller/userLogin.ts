@@ -1,9 +1,9 @@
-const Model = require('../Model');
-const crypto = require('crypto');
+import Model from '../Model';
+import * as crypto from 'crypto';
 
-module.exports = async (ctx) => {
+export default async (ctx: any) => {
   try {
-      const model = new Model();
+      const model: Model = new Model();
       const password = crypto
           .createHash('md5')
           .update(ctx.request.query.password)
