@@ -22,7 +22,7 @@ export default class PageChat extends React.PureComponent {
     }
 
     connetListen() {
-        this.socket = IO.connect(`${window.location.origin}/chat`);
+        this.socket = IO.connect(`http://localhost:5599/chat`);
         this.socket.on('people-join', (data) => {
             message.info(data.message);
         });

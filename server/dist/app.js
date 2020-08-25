@@ -12,10 +12,13 @@ let roomName = `${Math.random()}`;
 nsp.on('connection', (socket) => {
     console.log(`[房间名称：${roomName}]`);
     socket.join(roomName);
-    nsp.to(roomName).emit('people-join', { message: 'One people join us' });
+    // console.log('[调试一下广播]', nsp.to(roomName).server);
+    // nsp.to(roomName).emit('people-join', { message: 'One people join us' });
+    socket.broadcast.emit('people-join', { message: 'One people join us' });
     socket.on('one-request', function (data) {
         console.log(data);
-        nsp.to(roomName).emit('response-all', { message: data.message });
+        // nsp.to(roomName).emit('response-all', { message: data.message });
+        socket.broadcast.emit('response-all', { message: data.message });
     });
 });
 // 路由
